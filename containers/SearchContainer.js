@@ -1,27 +1,28 @@
 import React from 'react';
 import Search from '../components/Search';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { searchStore } from '../stores/searchStore';
 
-export default class SearchContainer extends React.Component {
+@observer class SearchContainer extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            searchQuery: '',
-        };
 
         this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
     }
     handleSearchQueryChange(event) {
-        this.setState({
-            searchQuery: event.target.value,
-        });
+        const query = event.target.value;
+        searchStore.newQuery(query);
     }
     render() {
         return (
             <Search
-                searchQuery={this.state.searchQuery}
-                handleSearchQueryChange={this.handleSearchQueryChange}
+                searchQuery={searchStore.query}
+                handleSearchQueryChange={ this.handleSearchQueryChange }
+                handleSearchQuerySubmit={ (event) => { console.log(searchStore.query); } }
             />
         )
     }
 }
+
+export default SearchContainer;
