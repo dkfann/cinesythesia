@@ -9,17 +9,24 @@ import { searchStore } from '../stores/searchStore';
         super(props);
 
         this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
+        this.handleSearchQuerySubmit = this.handleSearchQuerySubmit.bind(this);
     }
     handleSearchQueryChange(event) {
         const query = event.target.value;
         searchStore.newQuery(query);
     }
+    handleSearchQuerySubmit() {
+        const query = searchStore.currentQuery;
+
+        searchStore.searchTMDBforMovieByName(query);
+    }
     render() {
         return (
             <Search
-                searchQuery={searchStore.query}
+                searchQuery={ searchStore.query }
                 handleSearchQueryChange={ this.handleSearchQueryChange }
-                handleSearchQuerySubmit={ (event) => { console.log(searchStore.query); } }
+                handleSearchQuerySubmit={ this.handleSearchQuerySubmit }
+                movieData={ searchStore.movieData }
             />
         )
     }

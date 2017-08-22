@@ -3,7 +3,7 @@ import SearchStyles from '../styles/SearchStyles';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-const Search = ({ searchQuery, handleSearchQueryChange, handleSearchQuerySubmit }) => {
+const Search = ({ searchQuery, handleSearchQueryChange, handleSearchQuerySubmit , movieData }) => {
     return (
         <div className="c-movie-search" style={ SearchStyles.container }>
             <div className="c-movie-search__label" style={ SearchStyles.label }>Search For A Movie:</div>
@@ -20,6 +20,7 @@ const Search = ({ searchQuery, handleSearchQueryChange, handleSearchQuerySubmit 
             >
                 Search
             </button>
+            <div>{ JSON.stringify(movieData, null, 2) }</div>
         </div>
     )
 };
