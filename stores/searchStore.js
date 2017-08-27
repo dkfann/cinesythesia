@@ -4,11 +4,11 @@ import { TMDB_API_KEY, OMDB_API_KEY } from '../dev-private/apiKeys';
 
 class SearchStore {
     @observable query;
-    @observable movieData;
+    @observable movieSearchData;
 
     constructor(query = 'test') {
         this.query = query;
-        this.movieData = [];
+        this.movieSearchData = [];
     }
     @computed get currentQuery() {
         return this.query;
@@ -19,11 +19,12 @@ class SearchStore {
     @action searchTMDBforMovieByName = query => {
         const movieSearcher = movieApi({ tmdbApiKey: TMDB_API_KEY, omdbApiKey: OMDB_API_KEY });
 
-        const movieQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&vote_count.gte=1000&vote_average.gte=8`;
+        // const movieQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&vote_count.gte=1000&vote_average.gte=8`;
+        const movieQuery = `https://api.themoviedb.org/3/search/movie/?api_key=${TMDB_API_KEY}&query=${query}`;
 
         movieSearcher.getMovieTitleQueryFromTMDBQuery(movieQuery)
             .then(resolve => {
-                this.movieData = resolve.results;
+                this.movieSearchData = resolve.results;
             });
     }
 
