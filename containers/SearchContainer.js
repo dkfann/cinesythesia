@@ -26,7 +26,7 @@ import { searchStore } from '../stores/searchStore';
                 searchQuery={ searchStore.query }
                 handleSearchQueryChange={ this.handleSearchQueryChange }
                 handleSearchQuerySubmit={ this.handleSearchQuerySubmit }
-                movieData={ searchStore.movieData }
+                movieData={ searchStore.movieSearchData }
             />
         )
     }

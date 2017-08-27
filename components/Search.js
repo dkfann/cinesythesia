@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchStyles from '../styles/SearchStyles';
+import MovieSearchDisplay from './MovieSearchDisplay';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
@@ -20,7 +21,6 @@ const Search = ({ searchQuery, handleSearchQueryChange, handleSearchQuerySubmit 
             >
                 Search
             </button>
-            <div>{ JSON.stringify(movieData, null, 2) }</div>
         </div>
     )
 };
